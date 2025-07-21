@@ -3,3 +3,4 @@ secrets:
   helius-key: ${HELIUS_KEY}
   tg-token: ${TG_TOKEN}
   tg-chat: ${TG_CHAT}
+  clickhouse-url: ${CLICKHOUSE_URL:jdbc:clickhouse://localhost:8123}

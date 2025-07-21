@@ -10,6 +10,7 @@ public class SecretsProperties {
     private String heliusKey;
     private String tgToken;
     private String tgChat;
+    private String clickhouseUrl;
 
     public String getBirdeyeKey() {
         return birdeyeKey;
@@ -41,5 +42,13 @@ public class SecretsProperties {
 
     public void setTgChat(String tgChat) {
         this.tgChat = tgChat;
+    }
+
+    public String getClickhouseUrl() {
+        return clickhouseUrl;
+    }
+
+    public void setClickhouseUrl(String clickhouseUrl) {
+        this.clickhouseUrl = clickhouseUrl;
     }
 }
