@@ -27,3 +27,10 @@ file, so you must generate it yourself before running the application or tests.
 The application uses ONNX Runtime to load this model and perform predictions via
 `OnnxModelService`. `MlScorerService` wraps this component and publishes an
 `AlertEvent` whenever a score is at least `0.70`.
+
+## Alert Pipeline
+
+`AlertEvent`s are forwarded to a Redis-backed `AlertBus`. `TelegramNotifier`
+subscribes to this channel and sends a Markdown message via Telegram's
+`sendMessage` API using OkHttp. A chat configured with `secrets.tgChat` receives
+an alert within seconds of the scoring call.
