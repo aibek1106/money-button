@@ -4,3 +4,7 @@ secrets:
   tg-token: ${TG_TOKEN}
   tg-chat: ${TG_CHAT}
   clickhouse-url: ${CLICKHOUSE_URL:jdbc:clickhouse://localhost:8123}
+  minio-endpoint: ${MINIO_ENDPOINT:http://localhost:9000}
+  minio-access-key: ${MINIO_ACCESS_KEY:minioadmin}
+  minio-secret-key: ${MINIO_SECRET_KEY:minioadmin}
+  minio-bucket: ${MINIO_BUCKET:labels}
