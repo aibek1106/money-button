@@ -6,7 +6,7 @@ import ai.onnxruntime.OrtException;
 import ai.onnxruntime.OrtSession;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.PreDestroy;
+import jakarta.annotation.PreDestroy;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Collections;
