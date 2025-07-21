@@ -1,0 +1,5 @@
+secrets:
+  birdeye-key: ${BIRDEYE_KEY}
+  helius-key: ${HELIUS_KEY}
+  tg-token: ${TG_TOKEN}
+  tg-chat: ${TG_CHAT}
