@@ -1,6 +1,7 @@
 package com.example.moneybutton.feedback;
 
 import com.example.moneybutton.SecretsProperties;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import software.amazon.awssdk.core.sync.RequestBody;
@@ -18,6 +19,7 @@ import java.time.Instant;
 import java.time.format.DateTimeFormatter;
 
 @Service
+@ConditionalOnProperty(prefix = "secrets", name = "clickhouse-enabled", havingValue = "true", matchIfMissing = true)
 public class FeedbackService {
     private final DataSource dataSource;
     private final S3Client s3Client;

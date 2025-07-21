@@ -2,6 +2,7 @@ package com.example.moneybutton.features;
 
 import com.example.moneybutton.birdeye.BirdeyeClient;
 import com.example.moneybutton.birdeye.dto.TokenMarketDto;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +14,7 @@ import java.time.Instant;
 import java.util.List;
 
 @Service
+@ConditionalOnProperty(prefix = "secrets", name = "clickhouse-enabled", havingValue = "true", matchIfMissing = true)
 public class FeatureExtractor {
 
     private final BirdeyeClient birdeyeClient;

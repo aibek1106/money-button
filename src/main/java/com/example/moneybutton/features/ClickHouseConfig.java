@@ -3,6 +3,7 @@ package com.example.moneybutton.features;
 import com.example.moneybutton.SecretsProperties;
 import com.clickhouse.jdbc.ClickHouseDataSource;
 import jakarta.annotation.PostConstruct;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -11,6 +12,7 @@ import java.sql.Connection;
 import java.sql.Statement;
 
 @Configuration
+@ConditionalOnProperty(prefix = "secrets", name = "clickhouse-enabled", havingValue = "true", matchIfMissing = true)
 public class ClickHouseConfig {
 
     private final SecretsProperties secrets;
