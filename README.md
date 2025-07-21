@@ -18,3 +18,11 @@ docker run -p 8080:8080 money-button
 ```
 
 The application exposes `GET /actuator/health` for health checks.
+
+## Machine Learning
+
+Run `train_lightgbm.py` to train a simple LightGBM model and export it to
+`src/main/resources/model.onnx`.  The repository does not include this binary
+file, so you must generate it yourself before running the application or tests.
+The application uses ONNX Runtime to load this model and perform predictions via
+`OnnxModelService`.
