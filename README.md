@@ -1,43 +1,58 @@
 # money-button
 
-This project demonstrates a Spring Boot 3.3 application.
+This project demonstrates a Spring Boot 3.3 application used for scanning Solana tokens.
 
-## Build
+## Prerequisites
+- **JDK 21**
+- **Maven 3.9**
+- **Docker** (for containerised execution)
 
-```
+## Environment Variables
+Set the following variables before running locally or in Docker:
+- `BIRDEYE_KEY`
+- `HELIUS_KEY`
+- `TG_TOKEN`
+- `TG_CHAT`
+
+## Local Build & Run
+```bash
 mvn clean package
+mvn spring-boot:run
 ```
+The application exposes `GET /actuator/health` and `GET /actuator/prometheus` endpoints.
 
 ## Docker
-
-Build and run the Docker container:
-
-```
+Build and run via Docker:
+```bash
 docker build -t money-button .
-docker run -p 8080:8080 money-button
+docker run -p 8080:8080 \
+  -e BIRDEYE_KEY=$BIRDEYE_KEY \
+  -e HELIUS_KEY=$HELIUS_KEY \
+  -e TG_TOKEN=$TG_TOKEN \
+  -e TG_CHAT=$TG_CHAT \
+  ghcr.io/you/solana-scanner
 ```
 
-The application exposes `GET /actuator/health` for health checks.
+## Kubernetes
+For k3s/k8s you can deploy with Helm:
+```bash
+helm install scanner chart/ \
+  --set secrets.birdeyeKey=$BIRDEYE_KEY \
+  --set secrets.heliusKey=$HELIUS_KEY \
+  --set secrets.tgToken=$TG_TOKEN \
+  --set secrets.tgChat=$TG_CHAT
+```
 
-## Machine Learning
+## Metrics & OpenTelemetry
+Metrics are exposed on `/actuator/prometheus`. To enable OTEL tracing set standard
+OpenTelemetry environment variables such as `OTEL_EXPORTER_OTLP_ENDPOINT` when running.
 
-Run `python train_lightgbm.py` to train a simple LightGBM model and export it to
-`src/main/resources/model.onnx`. The repository does not include this binary
-file, so you must generate it yourself before running the application or tests.
-The application uses ONNX Runtime to load this model and perform predictions via
-`OnnxModelService`. `MlScorerService` wraps this component and publishes an
-`AlertEvent` whenever a score is at least `0.70`.
-
-## Alert Pipeline
-
-`AlertEvent`s are forwarded to a Redis-backed `AlertBus`. `TelegramNotifier`
-subscribes to this channel and sends a Markdown message via Telegram's
-`sendMessage` API using OkHttp. A chat configured with `secrets.tgChat` receives
-an alert within seconds of the scoring call.
-
-## Feedback & Retraining
-
-`POST /api/v1/feedback` accepts a JSON body with token features and an `outcome`
-flag. Rows are stored in ClickHouse and a nightly job exports new labels to a
-CSV file in the MinIO bucket configured via `secrets.*`. When at least 200 new
-labels are exported the job logs `retrain scheduled` to standard output.
+## Feedback API
+`POST /api/v1/feedback` accepts a JSON body:
+```json
+{
+  "features": {"values": [0.1,0.2,0.3,0.4,0.5]},
+  "outcome": true
+}
+```
+Entries are persisted to ClickHouse and exported nightly for potential retraining.
