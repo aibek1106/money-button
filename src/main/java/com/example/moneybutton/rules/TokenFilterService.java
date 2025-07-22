@@ -4,19 +4,22 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class TokenFilterService {
-    static final double MAX_FDV = 10_000_000d;
-    static final double MIN_LIQUIDITY = 100_000d;
-    static final double MIN_VOLUME = 1_000_000d;
+    static final double MAX_FDV = 100_000d;
+    static final double MIN_LIQUIDITY = 3_000d;
+    static final double MIN_VOL_CHANGE = 200d;
+    static final int MIN_HOLDERS = 100;
+    static final double MIN_LP_MONTHS = 6d;
 
     public boolean isPass(TokenInfo token) {
         if (token == null) {
             return false;
         }
-        boolean fdvOk = token.getFdv() <= MAX_FDV;
+        boolean fdvOk = token.getFdv() < MAX_FDV;
         boolean liquidityOk = token.getLiquidity() >= MIN_LIQUIDITY;
-        boolean volumeOk = token.getVolume24h() >= MIN_VOLUME;
+        boolean volumeOk = token.getVolume1hChange() >= MIN_VOL_CHANGE;
+        boolean holdersOk = token.getHolders() >= MIN_HOLDERS;
         boolean authorityOk = token.isAuthorityBurned();
-        boolean lpOk = token.isLpLocked();
-        return fdvOk && liquidityOk && volumeOk && authorityOk && lpOk;
+        boolean lpOk = token.getLpLockMonths() >= MIN_LP_MONTHS;
+        return fdvOk && liquidityOk && volumeOk && holdersOk && authorityOk && lpOk;
     }
 }
