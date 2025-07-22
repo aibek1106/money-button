@@ -2,7 +2,6 @@ package com.example.moneybutton.features;
 
 import com.clickhouse.jdbc.ClickHouseDataSource;
 import com.example.moneybutton.SecretsProperties;
-import jakarta.annotation.PostConstruct;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -14,11 +13,9 @@ import java.sql.SQLException;
 public class ClickHouseConfig {
 
     private final SecretsProperties secrets;
-    private final JdbcTemplate jdbcTemplate;
 
-    public ClickHouseConfig(SecretsProperties secrets, JdbcTemplate jdbcTemplate) {
+    public ClickHouseConfig(SecretsProperties secrets) {
         this.secrets = secrets;
-        this.jdbcTemplate = jdbcTemplate;
     }
 
     @Bean
@@ -28,12 +25,9 @@ public class ClickHouseConfig {
 
     @Bean
     public JdbcTemplate jdbcTemplate(DataSource dataSource) {
-        return new JdbcTemplate(dataSource);
-    }
-
-    @PostConstruct
-    public void init() {
+        JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
         jdbcTemplate.execute("CREATE TABLE IF NOT EXISTS features_5m (...)");
         jdbcTemplate.execute("CREATE TABLE IF NOT EXISTS feedback (...)");
+        return jdbcTemplate;
     }
 }
