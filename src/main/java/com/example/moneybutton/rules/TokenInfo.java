@@ -3,9 +3,11 @@ package com.example.moneybutton.rules;
 public class TokenInfo {
     private double fdv;
     private double liquidity;
-    private double volume24h;
+    private double volume1hChange;
+    private int holders;
     private boolean authorityBurned;
-    private boolean lpLocked;
+    private double lpLockMonths;
+    private double volume24h;
 
     public double getFdv() {
         return fdv;
@@ -23,12 +25,20 @@ public class TokenInfo {
         this.liquidity = liquidity;
     }
 
-    public double getVolume24h() {
-        return volume24h;
+    public double getVolume1hChange() {
+        return volume1hChange;
     }
 
-    public void setVolume24h(double volume24h) {
-        this.volume24h = volume24h;
+    public void setVolume1hChange(double volume1hChange) {
+        this.volume1hChange = volume1hChange;
+    }
+
+    public int getHolders() {
+        return holders;
+    }
+
+    public void setHolders(int holders) {
+        this.holders = holders;
     }
 
     public boolean isAuthorityBurned() {
@@ -39,11 +49,19 @@ public class TokenInfo {
         this.authorityBurned = authorityBurned;
     }
 
-    public boolean isLpLocked() {
-        return lpLocked;
+    public double getLpLockMonths() {
+        return lpLockMonths;
     }
 
-    public void setLpLocked(boolean lpLocked) {
-        this.lpLocked = lpLocked;
+    public void setLpLockMonths(double lpLockMonths) {
+        this.lpLockMonths = lpLockMonths;
+    }
+
+    public double getVolume24h() {
+        return volume24h;
+    }
+
+    public void setVolume24h(double volume24h) {
+        this.volume24h = volume24h;
     }
 }
