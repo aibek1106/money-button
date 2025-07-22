@@ -30,6 +30,7 @@ public class BirdeyeClient {
             return webClient.get()
                     .uri(uriBuilder -> uriBuilder
                             .path("/defi/tokenlist")
+                            .queryParam("chain", "solana")
                             .queryParam("limit", limit)
                             .build())
                     .header("X-API-KEY", secrets.getBirdeyeKey())
