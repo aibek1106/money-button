@@ -4,6 +4,9 @@ spring:
   data:
     redis:
       url: ${REDIS_URL:redis://localhost:6379}
+  sql:
+    init:
+      mode: never
 
 management:
   endpoints:
