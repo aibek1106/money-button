@@ -7,13 +7,15 @@ This project demonstrates a Spring Boot 3.3 application used for scanning Solana
 - **Maven 3.9**
 - **Docker** (for containerised execution)
 
+Configuration is defined in `src/main/resources/application.yml`.
+
 ## Environment Variables
 Set the following variables before running locally or in Docker:
 - `BIRDEYE_KEY`
 - `HELIUS_KEY`
 - `TG_TOKEN`
 - `TG_CHAT`
-- `CLICKHOUSE_ENABLED` (optional, default true)
+- `CLICKHOUSE_ENABLED` (optional, default false)
 
 ## Local Build & Run
 ```bash

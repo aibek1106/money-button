@@ -12,7 +12,7 @@ import java.sql.Connection;
 import java.sql.Statement;
 
 @Configuration
-@ConditionalOnProperty(prefix = "secrets", name = "clickhouse-enabled", havingValue = "true", matchIfMissing = true)
+@ConditionalOnProperty(prefix = "secrets", name = "clickhouse-enabled", havingValue = "true", matchIfMissing = false)
 public class ClickHouseConfig {
 
     private final SecretsProperties secrets;

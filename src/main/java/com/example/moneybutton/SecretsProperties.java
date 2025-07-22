@@ -11,7 +11,7 @@ public class SecretsProperties {
     private String tgToken;
     private String tgChat;
     private String clickhouseUrl;
-    private boolean clickhouseEnabled = true;
+    private boolean clickhouseEnabled = false;
     private String minioEndpoint;
     private String minioAccessKey;
     private String minioSecretKey;
