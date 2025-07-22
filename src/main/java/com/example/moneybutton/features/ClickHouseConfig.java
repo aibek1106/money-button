@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Configuration;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.sql.Statement;
 
 @Configuration
@@ -22,7 +23,7 @@ public class ClickHouseConfig {
     }
 
     @Bean
-    public DataSource clickHouseDataSource() {
+    public DataSource clickHouseDataSource() throws SQLException {
         return new ClickHouseDataSource(secrets.getClickhouseUrl());
     }
 
