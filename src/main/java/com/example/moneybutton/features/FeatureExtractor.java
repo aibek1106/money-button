@@ -14,7 +14,6 @@ import java.time.Instant;
 import java.util.List;
 
 @Service
-@ConditionalOnProperty(prefix = "secrets", name = "clickhouse-enabled", havingValue = "true", matchIfMissing = true)
 public class FeatureExtractor {
 
     private final BirdeyeClient birdeyeClient;

@@ -19,7 +19,6 @@ import java.time.Instant;
 import java.time.format.DateTimeFormatter;
 
 @Service
-@ConditionalOnProperty(prefix = "secrets", name = "clickhouse-enabled", havingValue = "true", matchIfMissing = true)
 public class FeedbackService {
     private final DataSource dataSource;
     private final S3Client s3Client;
