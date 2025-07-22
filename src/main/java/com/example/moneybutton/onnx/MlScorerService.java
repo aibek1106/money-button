@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class MlScorerService {
-    static final double THRESHOLD = 0.70d;
+    public static final double THRESHOLD = 0.8; // пример
 
     private final OnnxModelService modelService;
     private final ApplicationEventPublisher publisher;
