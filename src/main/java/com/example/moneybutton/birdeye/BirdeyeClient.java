@@ -32,12 +32,13 @@ public class BirdeyeClient {
         while (result.size() < limit) {
             int fetchLimit = Math.min(pageSize, limit - result.size());
             try {
+                int finalOffset = offset;
                 List<TokenMarketDto> page = webClient.get()
                         .uri(uriBuilder -> uriBuilder
                                 .path("/defi/tokenlist")
                                 .queryParam("chain", "solana")
                                 .queryParam("limit", fetchLimit)
-                                .queryParam("offset", offset)
+                                .queryParam("offset", finalOffset)
                                 .build())
                         .header("X-API-KEY", secrets.getBirdeyeKey())
                         .retrieve()
