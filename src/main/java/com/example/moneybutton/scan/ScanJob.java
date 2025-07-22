@@ -44,7 +44,7 @@ public class ScanJob {
 
     @Scheduled(fixedRate = 60_000)
     public void run() {
-        List<TokenMarketDto> tokens = birdeyeClient.getTopTokens(1000);
+        List<TokenMarketDto> tokens = birdeyeClient.getTopTokens(500);
         for (TokenMarketDto dto : tokens) {
             TokenInfo info = enrich(dto);
             if (!filterService.isPass(info)) {

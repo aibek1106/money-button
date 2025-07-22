@@ -25,3 +25,7 @@ secrets:
   minio-secret-key: ${MINIO_SECRET_KEY:minioadmin}
   minio-bucket: ${MINIO_BUCKET:labels}
 
+logging:
+  level:
+    com.example.moneybutton.birdeye: INFO
+
