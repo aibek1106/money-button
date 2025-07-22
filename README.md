@@ -15,8 +15,6 @@ Set the following variables before running locally or in Docker:
 - `HELIUS_KEY`
 - `TG_TOKEN`
 - `TG_CHAT`
-- `CLICKHOUSE_ENABLED` (optional, default false)
-
 ## Local Build & Run
 ```bash
 mvn clean package

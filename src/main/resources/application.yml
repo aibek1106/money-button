@@ -21,3 +21,4 @@ secrets:
   minio-access-key: ${MINIO_ACCESS_KEY:minioadmin}
   minio-secret-key: ${MINIO_SECRET_KEY:minioadmin}
   minio-bucket: ${MINIO_BUCKET:labels}
+
