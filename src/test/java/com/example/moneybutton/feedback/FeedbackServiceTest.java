@@ -4,6 +4,7 @@ import com.example.moneybutton.SecretsProperties;
 import com.example.moneybutton.onnx.TokenFeatures;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.jdbc.core.JdbcTemplate;
 import software.amazon.awssdk.services.s3.S3Client;
 
 import javax.sql.DataSource;
@@ -29,7 +30,7 @@ public class FeedbackServiceTest {
                 .credentialsProvider(software.amazon.awssdk.auth.credentials.AnonymousCredentialsProvider.create())
                 .endpointOverride(java.net.URI.create("http://localhost:0"))
                 .build();
-        service = new FeedbackService(ds, s3, secrets);
+        service = new FeedbackService(new JdbcTemplate(ds), s3, secrets);
     }
 
     @Test
